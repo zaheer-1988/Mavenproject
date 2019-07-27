@@ -22,6 +22,15 @@ pipeline {
                 }
             }
         }
+        stage ('deployment') {
+			steps {
+				sshagent(['centos']) {
+					sh 'scp -o StrictHostKeyChecking=no target/*.war centos@34.204.183.34:/opt/tomcat/apache-tomcat/webapps/'
+				}
+			}
+		
+		}
+		              
     }
 }
 
